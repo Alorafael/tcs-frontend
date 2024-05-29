@@ -1,0 +1,24 @@
+import logo from './logo.svg';
+import './App.css';
+import Home from './components/Home/Index';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import LoginPage from './components/Login/Index';
+import CadastroCandidato from './components/Cadastro/CadastroCandidato';
+import CadastroEmpresa from './components/Cadastro/CadastroEmpresa';
+
+function App() {
+  return (
+    <div>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home/>} /> 
+          <Route path="/login" element={<LoginPage/>} />
+          <Route path = "/cadastro-candidato" element={<CadastroCandidato/>} />
+          <Route path = "/cadastro-empresa" element={<CadastroEmpresa/>}/>
+      </Routes>
+    </Router>
+    </div>
+  );
+}
+
+export default App;
