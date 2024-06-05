@@ -38,7 +38,7 @@ const CadastroCandidato = () => {
                     <input type="password" value={senha} name="senha" onChange={(e) => setSenha(e.value.target)} placeholder="Digite sua senha"/>
                 </label>
             </div>
-            <input type="submit" value="Login"/>
+            <input type="submit" value="Cadastrar"/>
         </form>
     </div>
   )
