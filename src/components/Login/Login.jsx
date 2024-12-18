@@ -36,13 +36,13 @@ const Login = () => {
                 <div>
                     <label>
                         <span>Email:</span>
-                        <input type="text" value={email} onChange={(e) => setEmail(e.value)} placeholder="Digite seu E-mail"/>
+                        <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Digite seu E-mail"/>
                     </label>
                 </div>
                 <div>
                     <label>
                         <span>Senha:</span>
-                        <input type="password" value={senha} onChange={(e) => setSenha(e.value)} placeholder="Digite sua senha"/>
+                        <input type="password" value={senha} onChange={(e) => setSenha(e.target.value)} placeholder="Digite sua senha"/>
                     </label>
                 </div>
                 <input type="submit" value="Fazer Login"/>
