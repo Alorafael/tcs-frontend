@@ -19,9 +19,10 @@ const CadastrarCategoria = () => {
             <div>
                 <label>
                     <span>Nome:</span>
-                    <input type="text" value={titulo} onChange={(e) => setNome(e.value.target)} placeholder="Digite o nome da categoria"/>
+                    <input type="text" value={nome} onChange={(e) => setNome(e.value)} placeholder="Digite o nome da categoria"/>
                 </label>
             </div>
+            <input type="submit" value="Cadastrar Categoria"/>
         </form>
     </div>
   )

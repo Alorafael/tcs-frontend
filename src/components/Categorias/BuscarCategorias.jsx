@@ -25,7 +25,7 @@ const BuscarCategorias = () => {
             <h1>Listar Categorias</h1>
             {categorias.map((nome, index) => (
                 <div key={index}>
-                    <h2>{categorias.nome}</h2>
+                    <h2>{nome}</h2>
                     <br/>
                 </div>
             ))}

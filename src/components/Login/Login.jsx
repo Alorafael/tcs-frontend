@@ -1,0 +1,54 @@
+import React, { useEffect, useState } from 'react';
+import { realizarLogin } from '../../services/login/login';
+import { useNavigate } from 'react-router-dom'
+
+const Login = () => {
+
+    const navigate = useNavigate();
+
+    const [email, setEmail] = useState("")
+    const [senha, setSenha] = useState("")
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        const dados = {
+            email,
+            senha
+        }
+        try {
+            const response = realizarLogin(dados);
+            if(response.success === true){
+                sessionStorage.setItem('token', response.token);
+                sessionStorage.setItem('admin', response.admin)
+                alert('Login realizado com sucesso!');
+                navigate('/')
+            }else{
+                alert(response.message);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    return (
+        <div>
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label>
+                        <span>Email:</span>
+                        <input type="text" value={email} onChange={(e) => setEmail(e.value)} placeholder="Digite seu E-mail"/>
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <span>Senha:</span>
+                        <input type="password" value={senha} onChange={(e) => setSenha(e.value)} placeholder="Digite sua senha"/>
+                    </label>
+                </div>
+                <input type="submit" value="Fazer Login"/>
+            </form>
+        </div>
+    )
+}
+
+export default Login;
