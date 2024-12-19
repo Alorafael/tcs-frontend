@@ -16,8 +16,9 @@ const Login = () => {
             senha
         }
         try {
-            const response = realizarLogin(dados);
-            if(response.success === true){
+            const { response } = realizarLogin(dados);
+            console.log(response)
+            if(response.status === 200){
                 sessionStorage.setItem('token', response.token);
                 sessionStorage.setItem('admin', response.admin)
                 alert('Login realizado com sucesso!');
