@@ -16,8 +16,7 @@ const Login = () => {
             senha
         }
         try {
-            const { response } = realizarLogin(dados);
-            console.log(response)
+            const response = await realizarLogin(dados);
             if(response.status === 200){
                 sessionStorage.setItem('token', response.token);
                 sessionStorage.setItem('admin', response.admin)
