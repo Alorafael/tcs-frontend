@@ -1,6 +1,5 @@
 import axios from "axios";
 
-console.log("aqui")
 let api;
 const ip = sessionStorage.getItem('IP');
 const porta = sessionStorage.getItem('Porta');

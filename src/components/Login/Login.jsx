@@ -17,11 +17,13 @@ const Login = () => {
         }
         try {
             const response = await realizarLogin(dados);
+            
             if(response.status === 200){
-                sessionStorage.setItem('token', response.token);
-                sessionStorage.setItem('admin', response.admin)
+                sessionStorage.setItem('token', response.data.token);
+                sessionStorage.setItem('admin', response.data.admin);
+                // Use lib 'jwt-decode' or 'jose' to decode the token and get the admin payload
                 alert('Login realizado com sucesso!');
-                navigate('/')
+                navigate('/categorias');
             }else{
                 alert(response.message);
             }

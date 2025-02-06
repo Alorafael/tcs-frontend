@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import { cadastrarCategoria } from '../../services/categorias/categorias'
+import { useNavigate } from 'react-router-dom'
 
 const CadastrarCategoria = () => {
+
+    const navigate = useNavigate();
 
     const [nome, setNome] = useState("")
 
@@ -10,7 +13,18 @@ const CadastrarCategoria = () => {
         const dados = {
             nome
         }
-        cadastrarCategoria(dados)
+        try {
+            const response = await cadastrarCategoria(dados)
+            if(response.status === 201){
+                alert('Categoria cadastrado com sucesso!');
+                navigate('/')
+            }else{
+                alert(response.message);
+            }
+        }
+        catch (error){
+            console.error(error);
+        }
     }
 
   return (

@@ -2,6 +2,7 @@ import api from '../api/api'
 
 export async function cadastrarCategoria(dadosCategoria){
     try{
+        console.log("aqui")
         const response = await api.post('/categorias', dadosCategoria);
         return (response.data)
     }
