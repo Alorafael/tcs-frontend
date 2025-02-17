@@ -2,9 +2,9 @@ import api from '../api/api'
 
 export async function cadastrarCategoria(dadosCategoria){
     try{
-        console.log("aqui")
+        console.log(dadosCategoria)
         const response = await api.post('/categorias', dadosCategoria);
-        return (response.data)
+        return (response.data);
     }
     catch{
         return({message: "Erro ao coletar dados das categorias", success: false});

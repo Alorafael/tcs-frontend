@@ -1,6 +1,8 @@
 import './App.css';
 import Home from './components/Home/Home';
+import BuscarCategorias from './components/Categorias/BuscarCategorias';
 import CadastrarCategoria from './components/Categorias/CadastrarCategoria';
+import EditarCategorias from './components/Categorias/EditarCategorias';
 import Login from './components/Login/Login'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import LoginPage from './components/Login/Index';
@@ -13,9 +15,11 @@ function App() {
     <div>
       <Router>
         <Routes>
-          <Route path="/" element={<Home/>} /> 
-          <Route path="/categorias" element={<CadastrarCategoria/>} />
-          <Route path="/login" element={<Login/>} />
+          <Route path="/" element={<Home/>}/> 
+          <Route path="/categorias" element={<BuscarCategorias/>}/>
+          <Route path="/categorias-cadastro" element={<CadastrarCategoria/>}/>
+          <Route path="/categorias-editar" element={<EditarCategorias/>}/>
+          <Route path="/login" element={<Login/>}/>
       </Routes>
     </Router>
     </div>

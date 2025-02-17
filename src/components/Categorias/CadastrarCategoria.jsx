@@ -10,6 +10,7 @@ const CadastrarCategoria = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        console.log(nome)
         const dados = {
             nome
         }
@@ -17,7 +18,7 @@ const CadastrarCategoria = () => {
             const response = await cadastrarCategoria(dados)
             if(response.status === 201){
                 alert('Categoria cadastrado com sucesso!');
-                navigate('/')
+                navigate('/categorias')
             }else{
                 alert(response.message);
             }
@@ -33,7 +34,7 @@ const CadastrarCategoria = () => {
             <div>
                 <label>
                     <span>Nome:</span>
-                    <input type="text" value={nome} onChange={(e) => setNome(e.value)} placeholder="Digite o nome da categoria"/>
+                    <input type="text" value={nome} name="nome" onChange={(e) => setNome(e.target.value)} placeholder="Digite o nome da categoria"/>
                 </label>
             </div>
             <input type="submit" value="Cadastrar Categoria"/>

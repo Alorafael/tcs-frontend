@@ -10,16 +10,26 @@ const EditarCategoria = () => {
         const dados = {
             nome
         }
-        editarCategoria(dados)
+        try{
+            const reponse = await editarCategoria(dados);
+            if(response.status === 201){
+                alert('Categoria atualizada com sucesso!');
+                navigate('/categorias')
+            }else{
+                alert(response.message);
+            }
+        }
+        catch(error){
+            console.error(error);
+        }
     }
-
   return (
     <div>
         <form onSubmit={handleSubmit}>
             <div>
                 <label>
                     <span>nome:</span>
-                    <input type="text" value={nome} onChange={(e) => setNome(e.value.target)} placeholder="Digite o nome da categoria"/>
+                    <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} placeholder="Digite o nome da categoria"/>
                 </label>
             </div>
         </form>

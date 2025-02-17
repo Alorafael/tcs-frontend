@@ -2,6 +2,7 @@ import api from '../api/api';
 
 export async function realizarLogin(dadosLogin){
     try {
+        console.log("login")
         const response = await api.post('/login', dadosLogin)
         return response
 

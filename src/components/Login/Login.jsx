@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { realizarLogin } from '../../services/login/login';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import { decodeJwt } from 'jose';
 
 const Login = () => {
 
@@ -17,10 +18,10 @@ const Login = () => {
         }
         try {
             const response = await realizarLogin(dados);
-            
             if(response.status === 200){
+                const decoded = decodeJwt(response.data.token)
                 sessionStorage.setItem('token', response.data.token);
-                sessionStorage.setItem('admin', response.data.admin);
+                sessionStorage.setItem('admin', decoded.admin);
                 // Use lib 'jwt-decode' or 'jose' to decode the token and get the admin payload
                 alert('Login realizado com sucesso!');
                 navigate('/categorias');

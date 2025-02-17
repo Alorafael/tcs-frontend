@@ -1,6 +1,5 @@
 import React from 'react';
 import {useState} from 'react';
-import api from '../../services/api/api';
 import { useNavigate } from 'react-router-dom';
 
 

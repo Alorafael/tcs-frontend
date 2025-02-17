@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'
-import { buscarCategorias, deletarCategoria } from '../../services/categorias/categorias';
+import { buscarAvisos, deletarAvisos } from '../../services/avisos/avisos';
 
-const BuscarCategorias = () => {
+const BuscarAvisos = () => {
     const navigate = useNavigate();
-    const [categorias, setCategorias] = useState([]);
+    const [avisos, setAvisos] = useState([]);
 
-    const handleBuscarCategorias = async () => {
-        const response = await buscarCategorias();
+    const handleBuscarAvisos = async () => {
+        const response = await buscarAvisos();
         if(response.success === true){
-            setCategorias(response);
+            setAvisos(response);
             console.log(response);
         }
         else{
@@ -18,20 +18,20 @@ const BuscarCategorias = () => {
     }
 
     useEffect(() => {
-        handleBuscarCategorias();
+        handleBuscarAvisos();
     }, []);
 
-    const handleSignup = () => {
-        navigate("/categorias-cadastro");
+    const handleRegister = () => {
+        navigate("/avisos-cadastro");
     };
 
     const handleEdit= () => {
-        navigate("/categorias-editar");
+        navigate("/avisos-editar");
     };
 
     const handleDelete = async () => {
         try {
-            const response = await deletarCategoria(categoria.id);
+            const response = await deletarAvisos(aviso.id);
             if(response.success === true){
                 alert('Excluido com sucesso!');
             }else{
@@ -45,14 +45,15 @@ const BuscarCategorias = () => {
 
     return (
         <div>
-            <h1>Listar Categorias</h1>
+            <h1>Listar Avisos</h1>
             <div>
-                <h2>{JSON.stringify(categorias)}</h2>
+                <h2>{JSON.stringify(avisos)}</h2>
             </div>
-            {categorias.length > 0 ? (
-                categorias.map((categoria) => (
-                    <div key={categoria.id}>
-                        <h2>{categoria.nome}</h2>
+            {avisos.length > 0 ? (
+                avisos.map((aviso) => (
+                    <div key={aviso.id}>
+                        <h2>{aviso.idCategoria}</h2>
+                        <h2>{aviso.nome}</h2>
                         <div>
                             <button href={handleEdit}>Editar</button>
                         </div>
@@ -63,13 +64,13 @@ const BuscarCategorias = () => {
                     </div>
                 ))
             ) : (
-                <p>Nenhuma categoria encontrada.</p>
+                <p>Nenhum aviso encontrado.</p>
             )}
             <div>
-                <button onClick={handleSignup}>Cadastrar Categoria</button>
+                <button onClick={handleRegister}>Cadastrar Aviso</button>
             </div>
         </div>
     ) 
 }
 
-export default BuscarCategorias;
+export default BuscarAvisos;
