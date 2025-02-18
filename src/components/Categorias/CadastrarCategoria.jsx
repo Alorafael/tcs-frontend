@@ -1,12 +1,25 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { cadastrarCategoria } from '../../services/categorias/categorias'
 import { useNavigate } from 'react-router-dom'
+import api from '../../services/api/api'
 
 const CadastrarCategoria = () => {
 
     const navigate = useNavigate();
 
-    const [nome, setNome] = useState("")
+    const [nome, setNome] = useState("");
+    const [erro, setErro] = useState('');
+
+    useEffect(() => {
+        const ip = sessionStorage?.getItem('IP');
+        const porta = sessionStorage?.getItem('Porta');
+        
+        if (ip && porta) {
+          api.defaults.baseURL = `http://${ip}:${porta}`; 
+        } else {
+          setErro("IP ou Porta não encontrados no sessionStorage.");
+        }
+      }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault()

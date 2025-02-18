@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import { editarCategoria } from '../../services/categorias/categorias'
+import { useNavigate } from 'react-router-dom'
 
 const EditarCategoria = () => {
+
+    const navigate = useNavigate();
 
     const [nome, setNome] = useState("")
 
@@ -11,7 +14,7 @@ const EditarCategoria = () => {
             nome
         }
         try{
-            const reponse = await editarCategoria(dados);
+            const response = await editarCategoria(dados);
             if(response.status === 201){
                 alert('Categoria atualizada com sucesso!');
                 navigate('/categorias')

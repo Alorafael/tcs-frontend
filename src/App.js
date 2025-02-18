@@ -11,6 +11,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import ListarVagas from './components/Vagas/ListarVagas';
 
 function App() {
+
   return (
     <div>
       <Router>

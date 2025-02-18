@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { realizarLogin } from '../../services/login/login';
 import { useNavigate } from 'react-router-dom';
 import { decodeJwt } from 'jose';
+import api from '../../services/api/api'
 
 const Login = () => {
 
@@ -9,6 +10,18 @@ const Login = () => {
 
     const [email, setEmail] = useState("")
     const [senha, setSenha] = useState("")
+    const [erro, setErro] = useState('');
+
+    useEffect(() => {
+        const ip = sessionStorage?.getItem('IP');
+        const porta = sessionStorage?.getItem('Porta');
+        
+        if (ip && porta) {
+          api.defaults.baseURL = `http://${ip}:${porta}`; 
+        } else {
+          setErro("IP ou Porta não encontrados no sessionStorage.");
+        }
+      }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault()

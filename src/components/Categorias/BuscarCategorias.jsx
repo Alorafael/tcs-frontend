@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { buscarCategorias, deletarCategoria } from '../../services/categorias/categorias';
+import api from '../../services/api/api'
 
 const BuscarCategorias = () => {
     const navigate = useNavigate();
     const [categorias, setCategorias] = useState([]);
+    const [erro, setErro] = useState('');
 
     const handleBuscarCategorias = async () => {
         const response = await buscarCategorias();
@@ -18,6 +20,17 @@ const BuscarCategorias = () => {
     }
 
     useEffect(() => {
+        const ip = sessionStorage?.getItem('IP');
+        const porta = sessionStorage?.getItem('Porta');
+        
+        if (ip && porta) {
+          api.defaults.baseURL = `http://${ip}:${porta}`; 
+        } else {
+          setErro("IP ou Porta não encontrados no sessionStorage.");
+        }
+      }, []);
+
+    useEffect(() => {
         handleBuscarCategorias();
     }, []);
 
@@ -29,7 +42,7 @@ const BuscarCategorias = () => {
         navigate("/categorias-editar");
     };
 
-    const handleDelete = async () => {
+    const handleDelete = async (categoria) => {
         try {
             const response = await deletarCategoria(categoria.id);
             if(response.success === true){
@@ -57,7 +70,7 @@ const BuscarCategorias = () => {
                             <button href={handleEdit}>Editar</button>
                         </div>
                         <div>
-                            <button href={handleDelete}>Deletar</button>
+                            <button onClick={() => handleDelete(categoria)}>Deletar</button>
                         </div>
                         <br />
                     </div>
