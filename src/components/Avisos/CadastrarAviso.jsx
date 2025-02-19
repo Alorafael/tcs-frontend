@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { cadastrarAviso } from '../../services/avisos/avisos'
 import { useNavigate } from 'react-router-dom'
+import { buscarCategorias} from '../../services/categorias/categorias';
 import api from '../../services/api/api'
 
 const CadastrarAviso = () => {
@@ -9,7 +10,8 @@ const CadastrarAviso = () => {
 
     const [descricao, setDescricao] = useState("")
     const [idCategoria, setIdCategoria] = useState("")
-    const [erro, setErro] = useState('');
+    const [categorias, setCategorias] = useState([])
+    const [erro, setErro] = useState("");
 
     useEffect(() => {
         const ip = sessionStorage?.getItem('IP');
@@ -21,10 +23,19 @@ const CadastrarAviso = () => {
           setErro("IP ou Porta não encontrados no sessionStorage.");
         }
       }, []);
+
+    useEffect(() => {
+        // Fetch categorias on mount
+        const fetchCategorias = async () => {
+            const response = await buscarCategorias();
+            setCategorias(response.data || []); // Default to empty array if data is null
+        };
+
+        fetchCategorias();
+    }, [buscarCategorias]);
     
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(nome)
         const dados = {
             idCategoria,
             descricao
@@ -43,13 +54,24 @@ const CadastrarAviso = () => {
         }
     }
 
+    const handleBack = () => {
+        navigate('/avisos')
+    }
+
   return (
     <div>
         <form onSubmit={handleSubmit}>
             <div>
                 <label>
                     <span>Categoria:</span>
-                    <input type="text" value={idCategoria} onChange={(e) => setIdCategoria(e.target.value)} placeholder="Digite o id da categoria."/>
+                    <select value={idCategoria} onChange={(e) => setIdCategoria(e.target.value)}>
+                        <option value="">Selecione uma categoria</option>
+                        {categorias.map((categoria) => (
+                            <option key={categoria.id} value={categoria.id}>
+                                {categoria.nome}
+                            </option>
+                        ))}
+                    </select>
                 </label>
             </div>
             <div>
@@ -60,6 +82,7 @@ const CadastrarAviso = () => {
             </div>
             <input type="submit" value="Cadastrar Aviso"/>
         </form>
+        <button onClick={handleBack}>Voltar</button>
     </div>
   )
 }

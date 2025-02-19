@@ -39,15 +39,15 @@ const BuscarCategorias = () => {
         navigate("/categorias-cadastro");
     };
 
-    const handleEdit= () => {
-        navigate("/categorias-editar");
+    const handleEdit = (categoria) => {
+        navigate(`/categorias-editar/${categoria.id}`);
     };
 
     const handleDelete = async (categoria) => {
         try {
-            const response = await deletarCategoria(categoria.id);
-            if(response.success === true){
-                alert('Excluido com sucesso!');
+            const response = await deletarCategoria(categoria);
+            if(response.status === 200){
+                alert('Excluído com sucesso!');
             }else{
                 alert(response.message);
             }
@@ -60,27 +60,36 @@ const BuscarCategorias = () => {
     return (
         <div>
             <h1>Listar Categorias</h1>
+
+                    {categorias.length > 0 ? (
+                        categorias.map((categoria) => (
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr key={categoria.id}>
+                                    <td>{categoria.id}</td>
+                                    <td>{categoria.nome}</td>
+                                    <td>
+                                        <button onClick={() => handleEdit(categoria)}>Editar</button>
+                                    </td>
+                                    <td>
+                                        <button onClick={() => handleDelete(categoria)}>Deletar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        ))
+                    ) : (
+                        <p>Nenhuma categoria encontrada.</p>
+                    )}
+            
             <div>
-                <h2>{JSON.stringify(categorias)}</h2>
-            </div>
-            {categorias.length > 0 ? (
-                categorias.map((categoria) => (
-                    <div key={categoria.id}>
-                        <h2>{categoria.nome}</h2>
-                        <div>
-                            <button href={handleEdit}>Editar</button>
-                        </div>
-                        <div>
-                            <button onClick={() => handleDelete(categoria)}>Deletar</button>
-                        </div>
-                        <br />
-                    </div>
-                ))
-            ) : (
-                <p>Nenhuma categoria encontrada.</p>
-            )}
-            <div>
-                <button onClick={handleSignup}>Cadastrar Categoria</button>
+                <button onClick={handleSignup}>Cadastrar Nova Categoria</button>
             </div>
         </div>
     ) 

@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import { cadastrarCategoria } from '../../services/categorias/categorias'
-import { useNavigate } from 'react-router-dom'
-import api from '../../services/api/api'
+import React, { useEffect, useState } from 'react';
+import { cadastrarCategoria } from '../../services/categorias/categorias';
+import { useNavigate } from 'react-router-dom';
+import api from '../../services/api/api';
 
 const CadastrarCategoria = () => {
 
     const navigate = useNavigate();
 
     const [nome, setNome] = useState("");
-    const [erro, setErro] = useState('');
+    const [erro, setErro] = useState("");
 
     useEffect(() => {
         const ip = sessionStorage?.getItem('IP');
@@ -41,6 +41,10 @@ const CadastrarCategoria = () => {
         }
     }
 
+    const handleBack = () => {
+        navigate('/categorias')
+    }
+
   return (
     <div>
         <form onSubmit={handleSubmit}>
@@ -52,6 +56,9 @@ const CadastrarCategoria = () => {
             </div>
             <input type="submit" value="Cadastrar Categoria"/>
         </form>
+        <div>
+            <button onClick={handleBack}>Voltar</button>
+        </div>
     </div>
   )
 }

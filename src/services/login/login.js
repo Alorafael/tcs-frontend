@@ -18,3 +18,15 @@ export async function realizarLogin(dadosLogin){
                 success: false});
     }
 }
+
+export async function realizarLogout(){
+    try{ 
+        const response = await api.post('/logout')
+        return response
+
+    } catch (error) {
+        console.log(error)
+        return({ message: "Erro ao fazer login",
+                success: false});   
+    }
+}

@@ -3,7 +3,7 @@ import {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 
 
-const Home = () => {
+const Connection = () => {
 
     const navigate = useNavigate();
 
@@ -48,4 +48,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Connection

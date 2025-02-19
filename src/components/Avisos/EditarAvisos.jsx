@@ -1,11 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { atualizarAviso } from '../../services/avisos/avisos'
+import { useNavigate } from 'react-router-dom'
 import api from '../../services/api/api'
 
-const AtualizarAviso = () => {
+const AtualizarAviso = (params) => {
 
-    const [desricao, setDescricao] = useState("")
+    const navigate = useNavigate()
+
+    const [descricao, setDescricao] = useState("")
     const [erro, setErro] = useState('');
+
+    const id = params.params["id"]
 
     useEffect(() => {
         const ip = sessionStorage?.getItem('IP');
@@ -21,10 +26,11 @@ const AtualizarAviso = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const dados = {
+            id,
             descricao
         }
         try{
-            const reponse = await atualizarAviso(dados);
+            const response = await atualizarAviso(dados);
             if(response.status === 201){
                 alert('Aviso atualizado com sucesso!');
                 navigate('/avisos')
