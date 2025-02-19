@@ -14,7 +14,7 @@ export async function cadastrarCategoria(dadosCategoria){
 export async function buscarCategorias(dadosCategoria){
     try {
         const response = await api.get('/categorias', dadosCategoria);
-        return(response.data)
+        return(response)
     }
     catch(error){
         return({message: "Erro ao coletar dados das categorias", success: false});

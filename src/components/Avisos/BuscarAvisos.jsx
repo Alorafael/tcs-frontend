@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { buscarAvisos, deletarAvisos } from '../../services/avisos/avisos';
+import api from '../../services/api/api'
+
 
 const BuscarAvisos = () => {
     const navigate = useNavigate();
     const [avisos, setAvisos] = useState([]);
+    const [erro, setErro] = useState('');
 
     const handleBuscarAvisos = async () => {
         const response = await buscarAvisos();
@@ -16,6 +19,17 @@ const BuscarAvisos = () => {
             alert(response.message);
         }
     }
+
+    useEffect(() => {
+        const ip = sessionStorage?.getItem('IP');
+        const porta = sessionStorage?.getItem('Porta');
+        
+        if (ip && porta) {
+          api.defaults.baseURL = `http://${ip}:${porta}`; 
+        } else {
+          setErro("IP ou Porta não encontrados no sessionStorage.");
+        }
+      }, []);
 
     useEffect(() => {
         handleBuscarAvisos();

@@ -10,9 +10,10 @@ const BuscarCategorias = () => {
 
     const handleBuscarCategorias = async () => {
         const response = await buscarCategorias();
-        if(response.success === true){
-            setCategorias(response);
-            console.log(response);
+
+        if(response.status === 200){
+            setCategorias(response.data);
+            console.log(categorias);
         }
         else{
             alert(response.message);

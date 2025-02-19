@@ -1,9 +1,22 @@
 import React, { useState } from 'react'
 import { atualizarAviso } from '../../services/avisos/avisos'
+import api from '../../services/api/api'
 
 const AtualizarAviso = () => {
 
     const [desricao, setDescricao] = useState("")
+    const [erro, setErro] = useState('');
+
+    useEffect(() => {
+        const ip = sessionStorage?.getItem('IP');
+        const porta = sessionStorage?.getItem('Porta');
+        
+        if (ip && porta) {
+          api.defaults.baseURL = `http://${ip}:${porta}`; 
+        } else {
+          setErro("IP ou Porta não encontrados no sessionStorage.");
+        }
+      }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault()

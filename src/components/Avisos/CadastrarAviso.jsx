@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { cadastrarAviso } from '../../services/avisos/avisos'
 import { useNavigate } from 'react-router-dom'
+import api from '../../services/api/api'
 
 const CadastrarAviso = () => {
 
@@ -8,6 +9,18 @@ const CadastrarAviso = () => {
 
     const [descricao, setDescricao] = useState("")
     const [idCategoria, setIdCategoria] = useState("")
+    const [erro, setErro] = useState('');
+
+    useEffect(() => {
+        const ip = sessionStorage?.getItem('IP');
+        const porta = sessionStorage?.getItem('Porta');
+        
+        if (ip && porta) {
+          api.defaults.baseURL = `http://${ip}:${porta}`; 
+        } else {
+          setErro("IP ou Porta não encontrados no sessionStorage.");
+        }
+      }, []);
     
     const handleSubmit = async (e) => {
         e.preventDefault()
