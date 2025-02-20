@@ -26,7 +26,7 @@ export async function realizarLogout(){
 
     } catch (error) {
         console.log(error)
-        return({ message: "Erro ao fazer login",
+        return({ message: "Erro ao fazer logout",
                 success: false});   
     }
 }

@@ -42,7 +42,7 @@ export async function atualizarAviso(dadosAviso){
 
 export async function deletarAviso(dadosAviso){
     try{
-        const response = await api.delete(`/usuarios/${dadosAviso.id}`, dadosAviso);
+        const response = await api.delete(`/avisos/${dadosAviso.id}`, dadosAviso);
         return(response);
     }
     catch{

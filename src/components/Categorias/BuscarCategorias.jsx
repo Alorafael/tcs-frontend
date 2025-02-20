@@ -57,10 +57,13 @@ const BuscarCategorias = () => {
   
     }
 
+    const handleBack = () => {
+        navigate('/home')
+    }
+
     return (
         <div>
             <h1>Listar Categorias</h1>
-
                     {categorias.length > 0 ? (
                         categorias.map((categoria) => (
                         <table>
@@ -90,6 +93,9 @@ const BuscarCategorias = () => {
             
             <div>
                 <button onClick={handleSignup}>Cadastrar Nova Categoria</button>
+            </div>
+            <div>
+                <button onClick={handleBack}>Voltar</button>
             </div>
         </div>
     ) 

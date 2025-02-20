@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { realizarLogout } from '../../services/login/logout';
+import { realizarLogout } from '../../services/login/login';
 import api from '../../services/api/api';
 
 const Home = () => {
 
     const navigate = useNavigate();
+    const [erro, setErro] = useState('');
 
     useEffect(() => {
         const ip = sessionStorage?.getItem('IP');
@@ -18,18 +19,22 @@ const Home = () => {
         }
         }, []);
 
-    handleCategorias = () =>{
+    const handleCategorias = () =>{
         navigate("/categorias")
     }
 
-    handleAvisos = () =>{
+    const handleAvisos = () =>{
         navigate("/avisos")
     }
 
-    handleLogout = () => {
+    const handleUsuarios = () =>{
+        navigate("/usuarios")
+    }
+
+    const handleLogout = async () => {
         try{
-            const dadosLogin = sessionStorage?.getItem('token')
-            const response = realizarLogout(dadosLogin)
+            const response = await realizarLogout()
+            console.log(response)
             if(response.status === 200){
                 alert('Logout realizado com sucesso')
                 navigate("/login")
@@ -47,6 +52,9 @@ const Home = () => {
                 <h1>Home</h1>
             </div>
             <div>
+                {/* <div>
+                    <button onClick={handleUsuarios}>Usuarios</button>
+                </div> */}
                 <div>
                     <button onClick={handleCategorias}>Categorias</button>
                 </div>

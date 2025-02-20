@@ -15,7 +15,6 @@ if (typeof window !== 'undefined') {
       ...(token && {'Authorization': `Bearer ${token}`}),
       'Content-Type': 'application/json',
     },
-    withCredentials: false
   });
 }
 

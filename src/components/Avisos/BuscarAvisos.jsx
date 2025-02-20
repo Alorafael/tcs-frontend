@@ -69,7 +69,10 @@ const BuscarAvisos = () => {
         } catch (error) {
             console.error(error);
         }
-  
+    }
+
+    const handleBack = () => {
+        navigate('/home')
     }
 
     return (
@@ -98,7 +101,7 @@ const BuscarAvisos = () => {
                     <tbody>
                         <tr key={aviso.id}>
                             <td>{aviso.id}</td>
-                            <td>{aviso.nome}</td>
+                            <td>{aviso.descricao}</td>
                             <td>
                                 <button onClick={() => handleEdit(aviso)}>Editar</button>
                             </td>
@@ -114,6 +117,9 @@ const BuscarAvisos = () => {
             )}
             <div>
                 <button onClick={handleRegister}>Cadastrar Aviso</button>
+            </div>
+            <div>
+                <button onClick={handleBack}>Voltar</button>
             </div>
         </div>
     ) 

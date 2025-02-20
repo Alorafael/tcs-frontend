@@ -37,13 +37,17 @@ const Login = () => {
                 sessionStorage.setItem('admin', decoded.admin);
                 // Use lib 'jwt-decode' or 'jose' to decode the token and get the admin payload
                 alert('Login realizado com sucesso!');
-                navigate('/categorias');
+                navigate('/home');
             }else{
                 alert(response.message);
             }
         } catch (error) {
             console.error(error);
         }
+    }
+
+    const handleUsuarios = () =>{
+        navigate("/usuarios-cadastro")
     }
 
     return (
@@ -63,6 +67,9 @@ const Login = () => {
                 </div>
                 <input type="submit" value="Fazer Login"/>
             </form>
+            <div>
+                <button onClick={handleUsuarios}>Cadastrar Usuario</button>
+            </div>
         </div>
     )
 }

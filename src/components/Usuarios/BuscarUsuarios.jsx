@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { buscarUsuarios } from '../../services/users/users';
+import React, { useState, useEffect } from 'react';
+import { buscarUsuarios, deletarUsuario } from '../../services/user/user';
 import { useNavigate } from 'react-router-dom';
 
 const BuscarUsuario = () => {
@@ -26,7 +26,7 @@ const BuscarUsuario = () => {
 
     const handleDelete = async (id, nome) => {
         try {
-            const response = await deletarUsuarios(id);
+            const response = await deletarUsuario(id);
             if(response.status === 201){
                 alert('Excluido com sucesso!');
             }else{

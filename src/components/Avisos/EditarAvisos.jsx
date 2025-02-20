@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { atualizarAviso } from '../../services/avisos/avisos'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import api from '../../services/api/api'
 
-const AtualizarAviso = (params) => {
+const AtualizarAviso = () => {
 
     const navigate = useNavigate()
 
     const [descricao, setDescricao] = useState("")
     const [erro, setErro] = useState('');
 
-    const id = params.params["id"]
+    const id = useParams().id
 
     useEffect(() => {
         const ip = sessionStorage?.getItem('IP');
@@ -31,7 +31,7 @@ const AtualizarAviso = (params) => {
         }
         try{
             const response = await atualizarAviso(dados);
-            if(response.status === 201){
+            if(response.status === 200){
                 alert('Aviso atualizado com sucesso!');
                 navigate('/avisos')
             }else{
@@ -43,6 +43,10 @@ const AtualizarAviso = (params) => {
         }
     }
 
+    const handleBack = () => {
+        navigate('/avisos')
+    }
+
   return (
     <div>
         <form onSubmit={handleSubmit}>
@@ -51,8 +55,12 @@ const AtualizarAviso = (params) => {
                     <span>Descrição:</span>
                     <input type="text" value={descricao} onChange={(e) => setDescricao(e.target.value)} placeholder="Digite a descrição do aviso"/>
                 </label>
+                <input type="submit" value="Editar Categoria"/>
             </div>
         </form>
+        <div>
+            <button onClick={handleBack}>Voltar</button>
+        </div>
     </div>
   )
 }

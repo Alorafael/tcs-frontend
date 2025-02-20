@@ -41,6 +41,11 @@ const EditarCategoria = () => {
             console.error(error);
         }
     }
+
+    const handleBack = () => {
+        navigate('/categorias')
+    }
+
   return (
     <div>
         <form onSubmit={handleSubmit}>
@@ -52,6 +57,9 @@ const EditarCategoria = () => {
                 <input type="submit" value="Editar Categoria"/>
             </div>
         </form>
+        <div>
+            <button onClick={handleBack}>Voltar</button>
+        </div>
     </div>
   )
 }

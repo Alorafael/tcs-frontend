@@ -1,13 +1,26 @@
-import React, { useState } from 'react'
-import { cadastrarUsuarios } from '../../services/users/users'
+import React, { useState, useEffect } from 'react'
+import { cadastrarUsuario } from '../../services/user/user'
 import { useNavigate } from 'react-router-dom'
+import api from '../../services/api/api';
 
 const CadastrarUsuario = () => {
     const navigate = useNavigate();
+    const [erro, setErro] = useState('');
 
     const [nome, setNome] = useState("")
     const [email, setEmail] = useState("")
     const [senha, setSenha] = useState("")
+
+    useEffect(() => {
+        const ip = sessionStorage?.getItem('IP');
+        const porta = sessionStorage?.getItem('Porta');
+        
+        if (ip && porta) {
+          api.defaults.baseURL = `http://${ip}:${porta}`; 
+        } else {
+          setErro("IP ou Porta não encontrados no sessionStorage.");
+        }
+      }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -17,7 +30,7 @@ const CadastrarUsuario = () => {
             senha
         }
         try{
-            const response = await cadastrarUsuarios(dados)
+            const response = await cadastrarUsuario(dados)
             if(response.status === 201){
                 alert('Usuário cadastrado com sucesso!');
                 navigate('/login');
